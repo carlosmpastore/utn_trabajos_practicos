@@ -122,10 +122,12 @@ nav ul li {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: cadetblue;
 }
 
 form {
-  margin: 20px 0;
+  margin-top: 20px;
+  margin-bottom: 175px;
   padding: 80px;
   width: 75%;
   border-radius: 10px;
@@ -166,13 +168,33 @@ form div button {
   border: none;
 }
 
+.separator {
+  width: 0;
+  height: 0;
+  border-right: 98vw solid transparent;
+  border-bottom: 13.9vw solid chocolate;
+  margin-top: -13.9vw;
+}
+
+/*Footer*/
+footer {
+  background-color: chocolate;
+  padding: 15px;
+  position: relative;
+}
+
+footer a {
+  display: block;
+  text-decoration: none;
+}
+
 /*WhatsApp Button*/
 .btn-wsp {
-  position: fixed;
+  position: absolute;
   width: 50px;
   height: 50px;
   line-height: 55px;
-  bottom: 30px;
+  bottom: 65px;
   right: 30px;
   background-color: #0df053;
   color: #fff;
