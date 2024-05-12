@@ -8,8 +8,9 @@
   scroll-behavior: smooth;
 }
 
-/*Header*/
+/*HEADER*/
 header {
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,18 +20,13 @@ header {
 .logo {
   height: 65px;
   width: 185px;
-  margin-left: 20px;
 }
 
-nav {
-  width: 100%;
-}
-
+/*Naveigation Bar*/
 nav ul {
   display: flex;
-  justify-content: end;
+  justify-content: space-evenly;
   gap: 35px;
-  margin-right: 20px;
 }
 
 nav ul li {
@@ -41,7 +37,8 @@ nav ul li {
   text-decoration: none;
 }
 
-/*Main*/
+/*MAIN*/
+/*Banner*/
 #banner {
   min-height: 100vh;
   display: flex;
@@ -53,19 +50,21 @@ nav ul li {
 #banner h1 {
   margin-bottom: 30px;
   font-size: 4em;
-  margin-left: 20px;
+  margin: 20px;
 }
 
 #banner p {
   text-align: left;
   font-size: x-large;
-  margin-left: 20px;
+  padding: 20px;
 }
 
 .store_img {
-  margin-right: 20px;
+  position: relative;
+  right: 20px;
 }
 
+/*Categories Section*/
 #categories {
   min-height: 100vh;
 }
@@ -95,6 +94,7 @@ nav ul li {
   text-align: center;
 }
 
+/*Top Products Section*/
 #top_products {
   min-height: 100vh;
 }
@@ -117,6 +117,7 @@ nav ul li {
   text-align: center;
 }
 
+/*Contact Us Section*/
 #contact {
   min-height: 70vh;
   display: flex;
@@ -125,11 +126,12 @@ nav ul li {
   background-color: cadetblue;
 }
 
+/*Form*/
 form {
-  margin-top: 20px;
+  margin-top: 100px;
   margin-bottom: 175px;
-  padding: 80px;
-  width: 75%;
+  padding: 30px;
+  width: 50%;
   border-radius: 10px;
   background-color: yellowgreen;
 }
@@ -176,7 +178,7 @@ form div button {
   margin-top: -13.9vw;
 }
 
-/*Footer*/
+/*FOOTER*/
 footer {
   background-color: chocolate;
   padding: 15px;
@@ -194,7 +196,7 @@ footer a {
   width: 50px;
   height: 50px;
   line-height: 55px;
-  bottom: 65px;
+  bottom: 80px;
   right: 30px;
   background-color: #0df053;
   color: #fff;
@@ -208,4 +210,43 @@ footer a {
 .btn-wsp:hover {
   background-color: #fff;
   color: #0df053;
+}
+
+/*WEB RESPONSIVE*/
+@media (max-width: 880px) {
+  #banner {
+    flex-wrap: wrap;
+  }
+  .grid_container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .category_card,
+  .product_card {
+    width: 100%;
+  }
+ form {
+  padding: 10px;
+  width: 50%;
+ }
+}
+
+@media (max-width: 480px) {
+  #banner {
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+  .store_img {
+    max-width: 100vw;
+  }
+  .grid_container {
+    grid-template-columns: 1fr;
+  }
+  .category_card,
+  .product_card {
+    max-width: 100%;
+  }
+ form {
+  padding: 10px;
+  width: 50%;
+ }
 }
