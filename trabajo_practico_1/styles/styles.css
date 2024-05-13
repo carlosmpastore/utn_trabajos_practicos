@@ -6,6 +6,15 @@
 
 :root {
   scroll-behavior: smooth;
+  --main-color: rgb(55, 55, 55);
+  --second-color: rgb(255, 178, 102);
+  --title-font: "Poetsen One", sans-serif;
+  --text-font: "Reddit Sans", sans-serif;
+}
+
+body {
+  font-family: var(--text-font);
+  background-color: var(--main-color);
 }
 
 /*HEADER*/
@@ -14,7 +23,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(220, 132, 16);
+  background-color: var(--second-color);
 }
 
 .logo {
@@ -35,6 +44,13 @@ nav ul li {
 
 .nav_link {
   text-decoration: none;
+  color: var(--main-color);
+}
+
+.nav_link:hover {
+  background-color: var(--main-color);
+  padding: 3px;
+  color: whitesmoke;
 }
 
 /*MAIN*/
@@ -48,15 +64,16 @@ nav ul li {
 }
 
 #banner h1 {
-  margin-bottom: 30px;
-  font-size: 4em;
   margin: 20px;
+  font-size: 4em;
+  font-family: var(--title-font);
+  color: var(--second-color);
 }
 
 #banner p {
-  text-align: left;
   font-size: x-large;
   padding: 20px;
+  color: whitesmoke;
 }
 
 .store_img {
@@ -69,10 +86,6 @@ nav ul li {
   min-height: 100vh;
 }
 
-#categories h2 {
-  text-align: center;
-}
-
 .grid_container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -81,8 +94,8 @@ nav ul li {
 }
 
 .category_card {
-  border: 1px solid black;
-  background-color: darkred;
+  border-radius: 10px; 
+  background: linear-gradient(transparent, var(--second-color), transparent);
 }
 
 .category_card img {
@@ -92,29 +105,65 @@ nav ul li {
 
 .category_card h3 {
   text-align: center;
+  font-family: var(--title-font);
+  color: whitesmoke;
 }
 
 /*Top Products Section*/
 #top_products {
   min-height: 100vh;
+  margin-bottom: 20px;
 }
 
-#top_products h3 {
+#top_products h2 {
+  margin-bottom: 35px;
   text-align: center;
+  font-family: var(--title-font);
+  font-size: 2.5em;
+  color: var(--second-color);
 }
 
 .product_card {
-  border: 1px solid black;
-  background-color: chocolate;
+  border-radius: 10px;
+  background-color: var(--second-color);
 }
 
 .product_card img {
-  height: 400px;
-  width: 400px;
+  height: 350px;
+  width: 350px;
 }
 
-.product_card p {
+.product_description {
   text-align: center;
+  color: var(--main-color);
+}
+
+.product_price {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 900;
+  color: rgb(131, 17, 17);
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.purchase_button {
+  width: 25%;
+  border: none;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: rgb(129, 188, 39);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.purchase_button:hover {
+  background-color: green;
+  color: whitesmoke;
 }
 
 /*Contact Us Section*/
@@ -123,7 +172,7 @@ nav ul li {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: cadetblue;
+  background-color: var(--main-color);
 }
 
 /*Form*/
@@ -133,12 +182,15 @@ form {
   padding: 30px;
   width: 50%;
   border-radius: 10px;
-  background-color: yellowgreen;
+  background-color: var(--second-color);
 }
 
 form h3 {
   text-align: center;
+  font-family: var(--title-font);
+  font-size: 2em;
   margin-bottom: 20px;
+  color: var(--main-color);
 }
 
 input {
@@ -147,6 +199,13 @@ input {
   padding: 7px;
   outline: none;
   border: none;
+  border-bottom: 2px solid rgb(224, 64, 6);
+  font-family: var(--text-font);
+  transition: transform 0.5s;
+}
+
+input:focus {
+  transform: scaleX(1.2);
 }
 
 textarea {
@@ -156,11 +215,13 @@ textarea {
   resize: none;
   outline: none;
   border: none;
+  border-bottom: 2px solid rgb(224, 64, 6);
+  font-family: var(--text-font);
+  transition: transform 0.5s;
 }
 
-.button_container {
-  display: flex;
-  justify-content: center;
+textarea:focus {
+  transform: scaleX(1.2);
 }
 
 form div button {
@@ -168,26 +229,43 @@ form div button {
   margin: 15px auto;
   padding: 7px;
   border: none;
+  background-color:rgb(129, 188, 39);
+  transition: all 0.3s;
+}
+
+form div button:hover {
+  background-color: green;
+  color: whitesmoke;
 }
 
 .separator {
   width: 0;
   height: 0;
   border-right: 98vw solid transparent;
-  border-bottom: 13.9vw solid chocolate;
+  border-bottom: 13.9vw solid var(--second-color);
   margin-top: -13.9vw;
 }
 
 /*FOOTER*/
 footer {
-  background-color: chocolate;
+  background-color: var(--second-color);
   padding: 15px;
   position: relative;
+}
+
+footer h3{
+  color: var(--main-color);
+  font-size: large;
+}
+
+footer p {
+  color: var(--main-color);
 }
 
 footer a {
   display: block;
   text-decoration: none;
+  color: var(--main-color);
 }
 
 /*WhatsApp Button*/
@@ -196,7 +274,7 @@ footer a {
   width: 50px;
   height: 50px;
   line-height: 55px;
-  bottom: 80px;
+  bottom: 90px;
   right: 30px;
   background-color: #0df053;
   color: #fff;

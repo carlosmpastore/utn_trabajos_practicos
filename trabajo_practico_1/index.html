@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
+    <!--Poetsen One Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <!--Reddit Sans Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <!--Web Page Icon-->
     <link rel="icon" href="./assets/icon.png" type="image/png">
     <!--Link with Boxicons-->
@@ -27,67 +35,78 @@
       <section id="banner">
         <div>
           <h1>Penny Lane</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus nihil doloremque corrupti recusandae dolore, ipsa unde necessitatibus dolorum voluptatem, harum eligendi! Similique excepturi, labore natus ex magni eum asperiores molestiae quam harum delectus fugiat vero eos iure nisi perspiciatis saepe sit fugit magnam ad? Reiciendis aliquid dolor architecto ad magni?</p>
+          <p>Somos una tienda de música que, desde hace más de 20 años, nos dedicamos a ofrecer los mejores instrumentos de marcas tanto nacionales como internacionales para cubrir las necesidades de una amplica gama de músicos: desde lo que se están iniciando en este mundo a los que llevan un poco más de tiempo</p>
         </div>
         <div>
           <img src="./assets/foto_tienda.webp" alt="Tienda de musica con instrumentos musicales exhibidos" title="Showroom de Penny Lane" class="store_img">
         </div>
       </section>
       <section id="categories">
-        <h2>Categorías de Productos</h2>
         <div class="grid_container">
           <div class="category_card">
             <h3>Instrumentos de Cuerda</h3>
-            <img src="./assets/instrumentos_cuerda2.png" alt="Instrumentos Musicales de Cuerda">
+            <img src="assets/inestrumentos_cuerda.png" alt="Instrumentos Musicales de Cuerda">
           </div>
           <div class="category_card">
             <h3>Instrumentos de Viento</h3>
-            <img src="./assets/instrumentos_viento.png" alt="Instrumentos Musicales de Viento">
+            <img src="./assets/instrumentos_viento2-.png" alt="Instrumentos Musicales de Viento">
           </div>
           <div class="category_card">
-            <h3>Instrumentos de Percusion</h3>
+            <h3>Instrumentos de Percusión</h3>
             <img src="./assets/intrumentos_percusion2.png" alt="Instrumentos Musicales de Percusion">
           </div>
         </div>
       </section>
       <section id="top_products">
-        <h3>Los más populares</h3>
+        <h2>Los más populares</h2>
         <div class="grid_container">
           <div class="product_card">
             <img src="./assets/top_bass.png" alt="Guitarra Bajo Hofner">
             <p class="product_description">Bajo Hofner Ignition Violin HI-BB-SB Sunburst</p>
             <p class="product_price">$ 600.000</p>
-            <button>Comprar</button>
+            <div class="button_container">
+              <button class="purchase_button">Comprar</button>
+            </div>
           </div>
           <div class="product_card">
             <img src="./assets/top_drums.png" alt="Bateria Ludwig">
             <p class="product_description">Bateria Ludwig Epic 6 Cascos En Maple Mahogany Burst Lcep22</p>
             <p class="product_price">$ 950.000</p>
-            <button>Comprar</button>
+            <div class="button_container">
+              <button class="purchase_button">Comprar</button>
+            </div>
           </div>
           <div class="product_card">
             <img src="./assets/top_guitar.png" alt="Guitarra Electrica Gibson">
             <p class="product_description">Guitarra eléctrica Gibson Les Paul Standard 50s Tobacco Burst</p>
             <p class="product_price">$ 750.000</p>
-            <button>Comprar</button>
+            <div class="button_container">
+              <button class="purchase_button">Comprar</button>
+            </div>
           </div>
           <div class="product_card">
             <img src="./assets/top_saxophone.png" alt="Saxofon Selmer">
             <p class="product_description">Saxofon Alto Selmer AS710DIR</p>
             <p class="product_price">$ 520.000</p>
-            <button>Comprar</button>
+            <div class="button_container">
+              <button class="purchase_button">Comprar</button>
+            </div>
           </div>
           <div class="product_card">
             <img src="./assets/top_trumpet.png" alt="Trompeta Clef">
             <p class="product_description">Trompeta Clef 150 Pocket Sib</p>
             <p class="product_price">$ 470.000</p>
-            <button>Comprar</button>
+            <div class="button_container">
+              <button class="purchase_button">Comprar</button>
+            </div>
           </div>
           <div class="product_card">
             <img src="./assets/top_violin.png" alt="Violin">
             <p class="product_description">Violin Stradivarius Lady Blunt</p>
             <p class="product_price">$ 880.000</p>
-            <button>Comprar</button>
+            <div class="button_container">
+              <button class="purchase_button">Comprar</button>
+            </div>
           </div>
         </div>
       </section>
@@ -114,10 +133,10 @@
       <a href="https://api.whatsapp.com/send?phone=4137732957" class="btn-wsp" target="_blank">
         <i class='bx bxl-whatsapp'></i>
       </a>
-      <p>Contactanos</p>
-      <a href="mailto:info@pennylane.com"><i class='bx bxs-envelope'></i> info@pennylane.com</a>
-      <a href="tel+4137732957"> <i class='bx bxs-phone'></i> Richard Starkey +4137732957</a>
-      <p><i class='bx bxs-home'></i> Avenida Sargento Pimienta Nº 1967 - Arequito (2183) Santa Fe</p>
+      <h3>Contactanos</h3>
+      <a href="mailto:info@pennylane.com" class="contact_info"><i class='bx bxs-envelope'></i> info@pennylane.com</a>
+      <a href="tel+4137732957" class="contact_info"> <i class='bx bxs-phone'></i> Richard Starkey +4137732957</a>
+      <p class="contact_info"><i class='bx bxs-home'></i> Avenida Sargento Pimienta Nº 1967 - Arequito (2183) Santa Fe</p>
     </footer>
   </body>
 </html>
