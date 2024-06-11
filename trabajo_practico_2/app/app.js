@@ -11,11 +11,17 @@ fetch("https://hp-api.onrender.com/api/characters")
     characters.forEach((character) => {
     
       //Modificar dato del estado de los personajes
-      let estado
+      let status;
       if (character.alive == true) {
-        estado = "Vivo";
+        status = "Vivo";
       } else {
-        estado = "Muerto";
+        status = "Muerto";
+      }
+
+      //Asignar una imagen alojada en repositorio local para los objetos que no tengan una
+      let imageSrc = character.image;
+      if (!imageSrc) {
+        imageSrc = "../assets/no_image_character.webp"
       }
     });
   })
