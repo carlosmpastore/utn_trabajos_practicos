@@ -30,6 +30,8 @@ nav ul li a {
 main {
   padding: 2em;
   text-align: center;
+  width: 70%;
+  margin: auto;
 }
 
 .intro {
