@@ -27,11 +27,11 @@ fetch("https://hp-api.onrender.com/api/characters")
     //Agregar al div de clase .grid un div con clase .card para cada objeto del API
     $grid.innerHTML += `<div class="card">
     <img src="${imageSrc}" alt="foto de ${character.name}">
+    <h4>${character.name}</h4>
     <p>Género: ${character.gender}</p>
     <p>Especie: ${character.species}</p>
     <p>Casa: ${character.house}</p>
     <p>Estado: ${status}</p>
-    <h4>${character.name}</h4>
     </div>`;
   });
 });
