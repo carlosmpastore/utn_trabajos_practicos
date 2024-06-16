@@ -1,0 +1,49 @@
+* {
+  scroll-behavior: smooth;
+}
+  
+body {
+  background-image: url(../assets/mapa_background.webp);
+  background-size: cover;
+}
+  
+h1 {
+  font-size: 3rem;
+}
+  
+h2 {
+  font-size: 2rem;
+  margin-top: 40px;
+}
+  
+section p {
+  font-size: 1.5rem;
+}
+  
+section div p {
+  font-size: 1.5rem;
+}
+
+.section-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+  
+.section-links a {
+  text-decoration: none;
+  color: black;
+}
+  
+.section-links a p {
+  font-size: 1rem;
+  text-align: center;
+}
+  
+.article-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
