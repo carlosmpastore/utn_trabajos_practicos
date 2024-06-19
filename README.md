@@ -15,4 +15,18 @@ Se optó por desarrollar una tienda online de instrumentos musicales que muestra
 - Fuentes de la librería de Google (Google Fonts)
 - Íconos de la librería de BoxIcons
 - Imágenes extraídas de la web
-- Formulario (funcionalidad del mismo) con formspree.io 
+- Formulario (funcionalidad del mismo) con formspree.io
+
+
+## Trabajo Práctico 2
+
+El segundo trabajo consiste en una página web en la cual, una de sus secciones, extrae datos de APIs mediante JavaScript
+
+### Modelo del Trabajo
+
+Para este trabajo se utilizaron APIs de Harry Potter para crear una página que brinde información sobre la saga relacionada a Hogwarts y otros lugares, criaturas y objetos del mundo mágico. Junto con información de cada personaje de la historia (nombre, especie, casa a la que pertenece, etcétera)
+
+### Herramientas Utilizadas
+
+- Imágenes Extraídas de la web
+- Chat GPT para desarrollo de texto sobre lugares y objetos del mundo mágico
