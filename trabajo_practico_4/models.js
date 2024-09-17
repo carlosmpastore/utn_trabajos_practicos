@@ -35,13 +35,32 @@ const getUsers = (urlFile) => {
   };
 };
 
-const respuesta = getUsers(PATH_FILE_USER);
-console.log(respuesta);
+//const respuesta = getUsers(PATH_FILE_USER);
+//console.log(respuesta);
 
 const getUserById = (id) => {
   try {
-  } catch (error) {}
+    if (!id) {
+      throw new Error("Insert an ID");
+    };
+
+    const users = getUsers(PATH_FILE_USER);
+    const foundUser = users.find((user) => user.id === id);
+
+    if (!foundUser) {
+      throw new Error("User not found");
+    };
+
+    return foundUser;
+
+  } catch (error) {
+    const objError = handleError(error, PATH_FILE_ERROR);
+    return objError;
+  };
 };
+
+//const respuesta = getUserById("1");
+//console.log(respuesta);
 
 // addUser recibe un objeto con toda la data para el nuevo usuario
 // valida que esten los datos míminos para añadir un nuevo usuario

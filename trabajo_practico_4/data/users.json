@@ -1,1 +1,1 @@
-[]
+[{"id": "1", "name": "example", "surname": "instance", "email": "example@example.com", "password": "123456", "isLoggedIn": false}]
