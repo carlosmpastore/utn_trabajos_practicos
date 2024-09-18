@@ -182,19 +182,37 @@ const updateUser = (userData) => {
   }
 };
 
-const respuesta = updateUser({
-  id:"3d8556a5-7bcf-4910-9403-e93895848cfc",
-  name: "Yosenit",
-  surname: "Lugambio",
-  email: "info@lugambio.com",
-  password: "abcd",
-  isLoggedIn: "",
-});
-console.log(respuesta);
+//const respuesta = updateUser({
+  //id:"3d8556a5-7bcf-4910-9403-e93895848cfc",
+  //name: "Yosenit",
+  //surname: "Lugambio",
+  //email: "info@lugambio.com",
+  //password: "abcd",
+  //isLoggedIn: "",
+//});
+//console.log(respuesta);
 
 const deleteUser = (id) => {
   try {
-  } catch (error) {}
+    if (!id) {
+      throw new Error("Insert an ID");
+    };
+
+    const users = getUsers(PATH_FILE_USER);
+    const userToDelete = getUserById(id);
+
+    const filteredUsers = users.filter((user) => user.id !== id);
+
+    writeFileSync(PATH_FILE_USER, JSON.stringify(filteredUsers));
+    return userToDelete;
+
+  } catch (error) {
+    const objError = handleError(error, PATH_FILE_ERROR);
+    return objError;
+  };
 };
+
+const respuesta = deleteUser("2");
+console.log(respuesta);
 
 export { getUsers, getUserById, addUser, updateUser, deleteUser };
