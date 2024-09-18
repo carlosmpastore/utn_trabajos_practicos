@@ -1,1 +1,1 @@
-[{"id": "1", "name": "example", "surname": "instance", "email": "example@example.com", "password": "123456", "isLoggedIn": false}]
+[{"id":"1","name":"example","surname":"instance","email":"example@example.com","password":"123456","isLoggedIn":false},{"id":"3d8556a5-7bcf-4910-9403-e93895848cfc","name":"Josemir","surname":"Lujambio","email":"info@lujambio.com","password":"88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589","isLoggedIn":true}]

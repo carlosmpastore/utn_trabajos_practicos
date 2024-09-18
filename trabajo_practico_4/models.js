@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { randomUUID } from "node:crypto";
+import { randomUUID, createHash } from "node:crypto";
 // Averiguar que importar de NODE para realizar el hash del pass
 // Averiguar como "activar" la lectura de las variables de entorno del archivo .env (dotenv)
 import dotenv from "dotenv";
@@ -70,8 +70,60 @@ const getUserById = (id) => {
 // hashea la contraseña antes de registrar al usuario
 const addUser = (userData) => {
   try {
-  } catch (error) {}
+    const {name, surname, email, password, isLoggedIn} = userData;
+
+    if (!name || !surname || !email || !password) {
+      throw new Error("Missing data: make sure to instert the following information about the user: name, surname, email, password and if it is logged in");
+    };
+
+    if (typeof name !== "string" || typeof surname !== "string" || typeof email !== "string") {
+      throw new Error("Make sure the user's data is a string");
+    };
+
+    if (!email.includes("@")) {
+      throw new Error("The email must include an '@'");
+    };
+
+    const users = getUsers(PATH_FILE_USER);
+
+    const foundEmail = users.find((user) => user.email === email);
+
+    if (foundEmail) {
+      throw new Error("The email already exists");
+    };
+
+    const hash = createHash("sha256").update(password).digest("hex");
+
+    const newUser = {
+      id: randomUUID(),
+      name,
+      surname,
+      email,
+      password: hash,
+      isLoggedIn: isLoggedIn === "logged in" ? true : false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toDateString(),
+    };
+
+    users.push(newUser);
+    writeFileSync(PATH_FILE_USER, JSON.stringify(users));
+
+    return newUser;
+
+  } catch (error) {
+    const objError = handleError(error, PATH_FILE_ERROR);
+    return objError;
+  };
 };
+
+const respuesta = addUser({
+  name: "Josemir",
+  surname: "Lujambio",
+  email: "info@lujambio.com",
+  password: "abcd",
+  isLoggedIn: "logged in"
+});
+console.log(respuesta);
 
 // todos los datos del usuario seleccionado se podrían modificar menos el ID
 // si se modifica la pass debería ser nuevamente hasheada
