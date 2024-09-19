@@ -70,10 +70,10 @@ const getUserById = (id) => {
 // hashea la contraseña antes de registrar al usuario
 const addUser = (userData) => {
   try {
-    const {name, surname, email, password, isLoggedIn} = userData;
+    const {name, surname, email, password} = userData;
 
     if (!name || !surname || !email || !password) {
-      throw new Error("Missing data: make sure to instert the following information about the user: name, surname, email, password and if it is logged in - in case it doesn't, you don't have to write anything");
+      throw new Error("Missing data: make sure to instert the following information about the user: name, surname, email and password");
     };
 
     if (typeof name !== "string" || typeof surname !== "string" || typeof email !== "string") {
@@ -100,9 +100,9 @@ const addUser = (userData) => {
       surname,
       email,
       password: hash,
-      isLoggedIn: isLoggedIn === "logged in" ? true : false,
+      isLoggedIn: false,
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toDateString(),
+      updatedAt: new Date().toISOString(),
     };
 
     users.push(newUser);
@@ -130,7 +130,7 @@ const addUser = (userData) => {
 // si se modifica el email, validar que este no exista
 const updateUser = (userData) => {
   try {
-    const {id, name, surname, email, password, isLoggedIn} = userData;
+    const {id, name, surname, email, password} = userData;
 
     if (!id) {
       throw new Error("Insert an ID");
@@ -145,7 +145,7 @@ const updateUser = (userData) => {
     };
 
     if (!name || !surname || !email || !password) {
-      throw new Error("Missing data: make sure to instert the following information about the user: name, surname, email, password and if it is logged in - in case it doesn't, you don't have to write anything");
+      throw new Error("Missing data: make sure to instert the following information about the user: name, surname, email");
     };
 
     if (typeof name !== "string" || typeof surname !== "string" || typeof email !== "string") {
@@ -170,7 +170,8 @@ const updateUser = (userData) => {
     if (email) foundUser.email = email;
     const hash = createHash("sha256").update(password).digest("hex");
     if (password) foundUser.password = hash;
-    if (isLoggedIn) foundUser.isLoggedIn === "logged in" ? true : false;
+    
+    foundUser.updatedAt() = new Date().toISOString();
 
     writeFileSync(PATH_FILE_USER, JSON.stringify(users));
 
@@ -212,7 +213,7 @@ const deleteUser = (id) => {
   };
 };
 
-const respuesta = deleteUser("2");
-console.log(respuesta);
+//const respuesta = deleteUser("2");
+//console.log(respuesta);
 
 export { getUsers, getUserById, addUser, updateUser, deleteUser };
