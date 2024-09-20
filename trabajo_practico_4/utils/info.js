@@ -1,7 +1,7 @@
 const info = {
-  author: "Gabriel Alberini",
+  author: "Emanuel Isaac, Carlos Romano, Luis Furtado, Juan Pablo Rosso, Thiago Cugliari, Carlos Pastore",
   version: "1.0.0",
-  name: "users-app-utn",
+  name: "Aplicación-de-Gestión-de-Usuarios",
   status: false,
 };
 

@@ -136,14 +136,6 @@ const updateUser = (userData) => {
       throw new Error("Insert an ID");
     };
 
-    const users = getUsers(PATH_FILE_USER);
-
-    const foundUser = users.find((user) => user.id === id);
-
-    if (!foundUser) {
-      throw new Error ("User not found");
-    };
-
     if (!name || !surname || !email || !password) {
       throw new Error("Missing data: make sure to instert the following information about the user: name, surname, email");
     };
@@ -154,6 +146,14 @@ const updateUser = (userData) => {
 
     if (!email.includes("@")) {
       throw new Error("The email must include an '@'");
+    };
+
+    const users = getUsers(PATH_FILE_USER);
+
+    const foundUser = users.find((user) => user.id === id);
+
+    if (!foundUser) {
+      throw new Error ("User not found");
     };
 
     const filteredUsers = users.filter((user) => user.id !== id);
@@ -171,7 +171,7 @@ const updateUser = (userData) => {
     const hash = createHash("sha256").update(password).digest("hex");
     if (password) foundUser.password = hash;
     
-    foundUser.updatedAt() = new Date().toISOString();
+    foundUser.updatedAt = new Date().toISOString();
 
     writeFileSync(PATH_FILE_USER, JSON.stringify(users));
 
