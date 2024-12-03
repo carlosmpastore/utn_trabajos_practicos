@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import DriverModel from "../models/driverModel";
 import { DriverData } from "../interfaces/DriverInterface";
 
@@ -40,19 +40,28 @@ const addDriver = async (req: Request, res: Response) => {
   };
 };
 
-const updateDriver = async () => {
+const updateDriver = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const {name, nationality, team, number} = req.body;
+  
   try {
-    
+    const updatedDriver = await DriverModel.updateDriver(id, {name, nationality, team, number});
+    res.status(200).json(updatedDriver);
+
   } catch (error: any) {
-    
+    res.status(500).json({status: 500, error: error.message});
   };
 };
 
-const deleteDriver = async () => {
+const deleteDriver = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  
   try {
-    
+    const deletedDriver = await DriverModel.deleteDriver(id);
+    res.json(deletedDriver);
+
   } catch (error: any) {
-    
+    res.status(500).json({status: 500, error: error.message});
   };
 };
 
