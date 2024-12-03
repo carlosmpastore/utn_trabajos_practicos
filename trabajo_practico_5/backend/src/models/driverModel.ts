@@ -37,11 +37,18 @@ const getAllDrivers = async () => {
   };
 };
 
-const getDriverById = async () => {
+const getDriverById = async (id: string) => {
   try {
-    
+    const driver = await Driver.findById(id);
+
+    if(!driver){
+      throw new Error("Driver not found");
+    };
+
+    return driver
+
   } catch (error) {
-    
+    throw new Error("Failed to ger driver");
   };
 };
 
