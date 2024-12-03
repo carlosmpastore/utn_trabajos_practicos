@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import DriverModel from "../models/driverModel";
+import { DriverData } from "../interfaces/DriverInterface";
 
 const getAllDrivers = async (req: Request, res: Response) => {
   try {
@@ -23,11 +24,19 @@ const getDriverById = async (req: Request, res: Response) => {
   };
 };
 
-const addDriver = async () => {
+const addDriver = async (req: Request, res: Response) => {
+  const {name, nationality, team, number} = req.body as DriverData;
+  
   try {
-    
+    const newDriver = await DriverModel.addDriver({name, nationality, team, number});
+    res.status(201).json(newDriver);
+
   } catch (error: any) {
-    
+    if(error.message.includes("already exists")) {
+      res.status(400).json({status: 400, error: error.message});
+    } else {
+      res.status(500).json({status: 500, error: error.message});
+    };
   };
 };
 
