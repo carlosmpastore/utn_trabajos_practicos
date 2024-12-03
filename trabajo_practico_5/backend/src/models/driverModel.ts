@@ -42,14 +42,14 @@ const getDriverById = async (id: string) => {
   try {
     const driver = await Driver.findById(id);
 
-    if(!driver){
+    /*if(!driver){
       throw new Error("Driver not found");
-    };
+    };*/
 
     return driver
 
   } catch (error) {
-    throw new Error("Failed to ger driver");
+    throw new Error("Failed to get driver");
   };
 };
 
@@ -105,7 +105,7 @@ const deleteDriver = async (id: string) => {
     return deletedDriver;
 
   } catch (error) {
-    throw new Error("Faield to delete driver");
+    throw new Error("Failed to delete driver");
   };
 };
 

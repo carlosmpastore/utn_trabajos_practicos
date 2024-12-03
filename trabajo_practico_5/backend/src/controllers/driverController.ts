@@ -17,6 +17,11 @@ const getDriverById = async (req: Request, res: Response) => {
   
   try {
     const driver = await DriverModel.getDriverById(id);
+
+    if(!driver){
+      res.status(404).json({status: 404, error: "Driver not found"});
+    };
+
     res.json(driver);
 
   } catch (error: any) {
