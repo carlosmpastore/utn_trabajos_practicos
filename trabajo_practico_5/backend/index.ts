@@ -1,5 +1,6 @@
 import express from "express";
 import { driverRoutes } from "./src/routes/driverRoutes";
+import { connectDB } from "./src/config/mongo";
 
 
 process.loadEnvFile();
@@ -13,4 +14,5 @@ app.use("/api/drivers", driverRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server up listening on http://localhost:${PORT}`);
+  connectDB();
 });
