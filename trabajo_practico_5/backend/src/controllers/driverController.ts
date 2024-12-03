@@ -1,25 +1,32 @@
+import { Request, Response } from "express";
 import DriverModel from "../models/driverModel";
 
-const getAllDrivers = async () => {
+const getAllDrivers = async (req: Request, res: Response) => {
   try {
-    
-  } catch (error) {
-    
+    const drivers = await DriverModel.getAllDrivers();
+    res.json(drivers);
+
+  } catch (error: any) {
+    res.status(500).json({ status: 500, error: error.message });
   };
 };
 
-const getDriverById = async () => {
+const getDriverById = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  
   try {
-    
-  } catch (error) {
-    
+    const driver = await DriverModel.getDriverById(id);
+    res.json(driver);
+
+  } catch (error: any) {
+    res.status(500).json({status: 500, error: error.message});
   };
 };
 
 const addDriver = async () => {
   try {
     
-  } catch (error) {
+  } catch (error: any) {
     
   };
 };
@@ -27,7 +34,7 @@ const addDriver = async () => {
 const updateDriver = async () => {
   try {
     
-  } catch (error) {
+  } catch (error: any) {
     
   };
 };
@@ -35,7 +42,7 @@ const updateDriver = async () => {
 const deleteDriver = async () => {
   try {
     
-  } catch (error) {
+  } catch (error: any) {
     
   };
 };
