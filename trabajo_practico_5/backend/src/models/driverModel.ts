@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { DriverData } from "../interfaces/DriverInterface";
 
 const driverSchema = new mongoose.Schema({
   name: {
@@ -52,27 +53,59 @@ const getDriverById = async (id: string) => {
   };
 };
 
-const addDriver = async () => {
+const addDriver = async (data: DriverData) => {
   try {
-    
+    // Se verifica si ya existe un piloto con el mismo nombre
+    const existingDriver = await Driver.findOne({name: data.name});
+
+    if(existingDriver) {
+      throw new Error("A driver with this name already exists");
+    };
+
+    const newDriver = new Driver(data);
+    await newDriver.save();
+    return newDriver;
+
   } catch (error) {
-    
+    throw new Error("Failed to add a new driver");
   };
 };
 
-const updateDriver = async () => {
+const updateDriver = async (id: string, data: Partial<DriverData>) => {
   try {
-    
+    // Se verifica si ya existe un piloto con el mismo nombre
+    const existingDriver = await Driver.findOne({name: data.name});
+
+    // Si encuentra un piloto con el mismo nombre y su ID no coincide con el ID del piloto a actualizar se arroja un nuevo error
+    if(existingDriver && existingDriver._id.toString() !== id) {
+      throw new Error("A driver with this name already exists");
+    };
+
+    const updatedDriver = await Driver.findByIdAndUpdate(id, data, {new: true});
+
+    if(!updatedDriver) {
+      throw new Error("Driver not found");
+    };
+
+    return updatedDriver;
+
   } catch (error) {
-    
+    throw new Error("Failed to update driver");
   };
 };
 
-const deleteDriver = async () => {
+const deleteDriver = async (id: string) => {
   try {
-    
+    const deletedDriver = await Driver.findByIdAndDelete(id);
+
+    if(!deletedDriver) {
+      throw new Error("Driver not found");
+    };
+
+    return deletedDriver;
+
   } catch (error) {
-    
+    throw new Error("Faield to delete driver");
   };
 };
 
