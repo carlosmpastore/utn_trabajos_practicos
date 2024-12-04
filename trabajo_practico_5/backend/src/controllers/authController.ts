@@ -19,7 +19,7 @@ const login = async (req: Request, res: Response) => {
   
   try {
     const token = await AuthModel.login({username, password});
-    res.status(200).json(token);
+    res.status(200).json({ token });
 
   } catch (error: any) {
     res.status(401).json({ status: 401, error: error.message });
