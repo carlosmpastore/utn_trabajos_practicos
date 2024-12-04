@@ -10,15 +10,19 @@ const register = async (req: Request, res: Response) => {
     res.status(201).json(registeredUser);
 
   } catch (error: any) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ status: 500, error: error.message });
   };
 };
 
-const login = async () => {
+const login = async (req: Request, res: Response) => {
+  const {username, password} = req.body as AuthData;
+  
   try {
-    
-  } catch (error) {
-    
+    const token = await AuthModel.login({username, password});
+    res.status(200).json(token);
+
+  } catch (error: any) {
+    res.status(401).json({ status: 401, error: error.message });
   };
 };
 
