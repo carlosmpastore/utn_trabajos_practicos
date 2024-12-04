@@ -32,3 +32,25 @@ const register = async (data: AuthData) => {
     throw new Error("Failed to register user");
   };
 };
+
+const login = async (data: AuthData) => {
+  try {
+    const foundUser = await User.findOne({username: data.username});
+    if(!foundUser) {
+      throw new Error("Invalid data: please, check your username");
+    };
+
+    const checkedPassword = await bcryptjs.compare(data.password, foundUser.password);
+    if(!checkedPassword) {
+      throw new Error("Invalid data: please, check your password");
+    };
+
+    const token = jwt.sign({ id: foundUser._id }, JWT_SECRET, { expiresIn: "1h" });
+    return token;
+
+  } catch (error) {
+    
+  };
+};
+
+export default { User, register, login };
