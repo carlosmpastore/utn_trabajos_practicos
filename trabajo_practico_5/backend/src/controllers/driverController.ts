@@ -18,8 +18,9 @@ const getDriverById = async (req: Request, res: Response) => {
   try {
     const driver = await DriverModel.getDriverById(id);
 
-    if(!driver){
-      res.status(404).json({status: 404, error: "Driver not found"});
+    if (!driver) {
+      res.status(404).json({ status: 404, message: "Driver not found" });
+      return;
     };
 
     res.json(driver);
@@ -33,6 +34,15 @@ const addDriver = async (req: Request, res: Response) => {
   const {name, nationality, team, number} = req.body as DriverData;
   
   try {
+    // Validar si ya existe un piloto con el mismo nombre
+    const existingDriver = await DriverModel.getDriverByName(name);
+
+    if (existingDriver) {
+      res.status(400).json({ status: 400, error: "A driver with this name already exists" });
+      return;
+    };
+
+    // Crear nuevo piloto
     const newDriver = await DriverModel.addDriver({name, nationality, team, number});
     res.status(201).json(newDriver);
 
@@ -50,7 +60,22 @@ const updateDriver = async (req: Request, res: Response) => {
   const {name, nationality, team, number} = req.body;
   
   try {
+    // Validar si ya existe un piloto con el mismo nombre
+    const existingDriver = await DriverModel.getDriverByName(name);
+    
+    if (existingDriver && existingDriver._id.toString() !== id) {
+      res.status(400).json({ status: 400, error: "A driver with this name already exists" });
+      return;
+    };
+
+    // Actualizar piloto
     const updatedDriver = await DriverModel.updateDriver(id, {name, nationality, team, number});
+
+    if (!updatedDriver) {
+      res.status(404).json({ status: 404, message: "Driver not found" });
+      return;
+    };
+
     res.status(200).json(updatedDriver);
 
   } catch (error: any) {
@@ -63,6 +88,12 @@ const deleteDriver = async (req: Request, res: Response) => {
   
   try {
     const deletedDriver = await DriverModel.deleteDriver(id);
+
+    if (!deletedDriver) {
+      res.status(404).json({ status: 404, message: "Driver not found" });
+      return;
+    };
+
     res.json(deletedDriver);
 
   } catch (error: any) {

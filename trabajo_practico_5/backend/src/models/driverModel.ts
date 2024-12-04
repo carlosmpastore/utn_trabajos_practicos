@@ -41,27 +41,24 @@ const getAllDrivers = async () => {
 const getDriverById = async (id: string) => {
   try {
     const driver = await Driver.findById(id);
-
-    /*if(!driver){
-      throw new Error("Driver not found");
-    };*/
-
-    return driver
+    return driver;
 
   } catch (error) {
     throw new Error("Failed to get driver");
   };
 };
 
+const getDriverByName = async (name: string) => {
+  try {
+    return await Driver.findOne({ name });
+
+  } catch (error) {
+    throw new Error("Failed to find driver by name");
+  };
+};
+
 const addDriver = async (data: DriverData) => {
   try {
-    // Se verifica si ya existe un piloto con el mismo nombre
-    const existingDriver = await Driver.findOne({name: data.name});
-
-    if(existingDriver) {
-      throw new Error("A driver with this name already exists");
-    };
-
     const newDriver = new Driver(data);
     await newDriver.save();
     return newDriver;
@@ -73,14 +70,6 @@ const addDriver = async (data: DriverData) => {
 
 const updateDriver = async (id: string, data: Partial<DriverData>) => {
   try {
-    // Se verifica si ya existe un piloto con el mismo nombre
-    const existingDriver = await Driver.findOne({name: data.name});
-
-    // Si encuentra un piloto con el mismo nombre y su ID no coincide con el ID del piloto a actualizar se arroja un nuevo error
-    if(existingDriver && existingDriver._id.toString() !== id) {
-      throw new Error("A driver with this name already exists");
-    };
-
     const updatedDriver = await Driver.findByIdAndUpdate(id, data, {new: true});
 
     if(!updatedDriver) {
@@ -109,4 +98,4 @@ const deleteDriver = async (id: string) => {
   };
 };
 
-export default { getAllDrivers, getDriverById, addDriver, updateDriver, deleteDriver };
+export default { getAllDrivers, getDriverById, getDriverByName, addDriver, updateDriver, deleteDriver };
