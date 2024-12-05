@@ -57,6 +57,15 @@ const getDriverByName = async (name: string) => {
   };
 };
 
+const getDriverByNumber = async (number: number) => {
+  try {
+    return await Driver.findOne({ number });
+
+  } catch (error) {
+    throw new Error("Failed to find driver by number");
+  };
+};
+
 const addDriver = async (data: DriverData) => {
   try {
     const newDriver = new Driver(data);
@@ -98,4 +107,4 @@ const deleteDriver = async (id: string) => {
   };
 };
 
-export default { getAllDrivers, getDriverById, getDriverByName, addDriver, updateDriver, deleteDriver };
+export default { getAllDrivers, getDriverById, getDriverByName, getDriverByNumber, addDriver, updateDriver, deleteDriver };

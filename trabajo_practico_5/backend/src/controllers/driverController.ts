@@ -1,6 +1,6 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import DriverModel from "../models/driverModel";
-import { DriverData } from "../interfaces/DriverInterface";
+import { DriverData, F1Teams } from "../interfaces/DriverInterface";
 
 const getAllDrivers = async (req: Request, res: Response) => {
   try {
@@ -36,9 +36,22 @@ const addDriver = async (req: Request, res: Response) => {
   try {
     // Validar si ya existe un piloto con el mismo nombre
     const existingDriver = await DriverModel.getDriverByName(name);
-
-    if (existingDriver) {
+    if(existingDriver) {
       res.status(400).json({ status: 400, error: "A driver with this name already exists" });
+      return;
+    };
+
+    // Validar si el equipo está permitido
+    const validTeams = Object.values(F1Teams);
+    if(!validTeams.includes(team)) {
+      res.status(400).json({ status: 400, error: `"${team}" is not a valid team. Allowed teams: ${validTeams.join(", ")}` });
+      return;
+    };
+
+    // Validar si ya existe un piloto con el mismo número
+    const existingNumber = await DriverModel.getDriverByNumber(number);
+    if(existingNumber) {
+      res.status(400).json({ status: 400, error: "A driver with this number already exists" });
       return;
     };
 
@@ -62,15 +75,27 @@ const updateDriver = async (req: Request, res: Response) => {
   try {
     // Validar si ya existe un piloto con el mismo nombre
     const existingDriver = await DriverModel.getDriverByName(name);
-    
-    if (existingDriver && existingDriver._id.toString() !== id) {
+    if(existingDriver && existingDriver._id.toString() !== id) {
       res.status(400).json({ status: 400, error: "A driver with this name already exists" });
+      return;
+    };
+
+    // Validar si el equipo está permitido
+    const validTeams = Object.values(F1Teams);
+    if(!validTeams.includes(team)) {
+      res.status(400).json({ status: 400, error: `"${team}" is not a valid team. Allowed teams: ${validTeams.join(", ")}` });
+      return;
+    };
+
+    // Validar si ya existe un piloto con el mismo número
+    const existingNumber = await DriverModel.getDriverByNumber(number);
+    if(existingNumber && existingNumber._id.toString() !== id) {
+      res.status(400).json({ status: 400, error: "A driver with this number already exists" });
       return;
     };
 
     // Actualizar piloto
     const updatedDriver = await DriverModel.updateDriver(id, {name, nationality, team, number});
-
     if (!updatedDriver) {
       res.status(404).json({ status: 404, message: "Driver not found" });
       return;

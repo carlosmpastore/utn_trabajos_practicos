@@ -18,4 +18,4 @@ interface DriverData {
   number: number,
 };
 
-export { DriverData }
+export { DriverData, F1Teams }
