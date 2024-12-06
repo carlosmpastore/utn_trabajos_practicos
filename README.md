@@ -128,6 +128,55 @@ Muestra una lista de todos los comandos disponibles y cómo usarlos.
 node index.js help
 ```
 
+
+## Trabajo Práctico 5
+
+### API Formula 1
+
+El quinto trabajo práctico consiste en el desarrollo de una API para gestionar pilotos de Formula 1 permitiendo la creación, lectura, actualización y borrado de cada uno de estos. El sistema CRUD cuanta con un proceso de autenticación que autoriza a ejecutar las acciones antes mencionadas a aquellos usuarios que estén registrados y hayan iniciado sesión mediante un nombre de usuario y una contraseña
+
+### Teconologías empleadas
+
+- Node.js
+- TypeScript
+- MongoDB
+- Json Web Token
+- Bcrypt
+
+### Instalación
+
+
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/carlosmpastore/utn_trabajos_practicos.git  
+```
+
+2. Navega al directorio del proyecto:
+3. 
+```bash 
+cd trabajo_practico_5/backend
+```
+
+3. Instala las dependencias:
+
+```bash
+npm install
+```
+
+4. Configuración Variables de Entorno
+
+El nombre de las variables de entorno utilizadas en el proyecto se encuentran en el archivo .env.example. Debe crearse un archivo .env con las mismas para poder ejecutarse el sistema
+
+
+5. Inicialización del servido
+
+```bash 
+npm run start
+```
+
+
 ### Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
