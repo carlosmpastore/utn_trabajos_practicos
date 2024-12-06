@@ -4,7 +4,7 @@ enum F1Teams {
   Ferrari = "Ferrari",
   McLaren = "McLaren",
   AstonMartin = "Aston Martin",
-  Hass = "Hass",
+  Hass = "Haas",
   Sauber = "Sauber",
   Alpine = "Alpine",
   Williams = "Williams",

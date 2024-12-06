@@ -15,7 +15,7 @@ const driverSchema = new mongoose.Schema({
     type: String, 
     required: true, 
     enum: {
-      values: ["Red Bull", "Mercedes", "Ferrari", "McLaren", "Aston Martin", "Hass", "Sauber", "Alpine", "Williams", "Alpha Tauri"],
+      values: ["Red Bull", "Mercedes", "Ferrari", "McLaren", "Aston Martin", "Haas", "Sauber", "Alpine", "Williams", "Alpha Tauri"],
       message: "{VALUE} is not a valid team"
     }
   },
@@ -79,7 +79,7 @@ const addDriver = async (data: DriverData) => {
 
 const updateDriver = async (id: string, data: Partial<DriverData>) => {
   try {
-    const updatedDriver = await Driver.findByIdAndUpdate(id, data, {new: true});
+    const updatedDriver = await Driver.findByIdAndUpdate(id, data, {new: true, runValidators: true});
 
     if(!updatedDriver) {
       throw new Error("Driver not found");
@@ -87,7 +87,8 @@ const updateDriver = async (id: string, data: Partial<DriverData>) => {
 
     return updatedDriver;
 
-  } catch (error) {
+  } catch (error: any) {
+    console.error("Error in updateDriver:", error.message); // Agrega este log
     throw new Error("Failed to update driver");
   };
 };
@@ -102,7 +103,8 @@ const deleteDriver = async (id: string) => {
 
     return deletedDriver;
 
-  } catch (error) {
+  } catch (error: any) {
+    console.error("Error in addDriver:", error.message); // Agrega este log
     throw new Error("Failed to delete driver");
   };
 };

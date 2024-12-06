@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import mongoose from "mongoose";
 import DriverModel from "../models/driverModel";
 import { DriverData, F1Teams } from "../interfaces/DriverInterface";
 
@@ -16,12 +17,13 @@ const getDriverById = async (req: Request, res: Response) => {
   const {id} = req.params;
   
   try {
-    const driver = await DriverModel.getDriverById(id);
-
-    if (!driver) {
-      res.status(404).json({ status: 404, message: "Driver not found" });
+    // Validar si el ID tiene un formato válido
+    if (!mongoose.isValidObjectId(id)) {
+      res.status(400).json({ status: 400, error: "Invalid ID format" });
       return;
     };
+
+    const driver = await DriverModel.getDriverById(id);
 
     res.json(driver);
 
@@ -51,7 +53,7 @@ const addDriver = async (req: Request, res: Response) => {
     // Validar si ya existe un piloto con el mismo número
     const existingNumber = await DriverModel.getDriverByNumber(number);
     if(existingNumber) {
-      res.status(400).json({ status: 400, error: "A driver with this number already exists" });
+      res.status(400).json({ status: 400, error: `Another driver is currently using number ${number}. Please try with another number` });
       return;
     };
 
@@ -73,33 +75,54 @@ const updateDriver = async (req: Request, res: Response) => {
   const {name, nationality, team, number} = req.body;
   
   try {
-    // Validar si ya existe un piloto con el mismo nombre
-    const existingDriver = await DriverModel.getDriverByName(name);
-    if(existingDriver && existingDriver._id.toString() !== id) {
-      res.status(400).json({ status: 400, error: "A driver with this name already exists" });
+    // Validar si el ID tiene un formato válido
+    if (!mongoose.isValidObjectId(id)) {
+      res.status(400).json({ status: 400, error: "Invalid ID format" });
       return;
     };
 
-    // Validar si el equipo está permitido
-    const validTeams = Object.values(F1Teams);
-    if(!validTeams.includes(team)) {
-      res.status(400).json({ status: 400, error: `"${team}" is not a valid team. Allowed teams: ${validTeams.join(", ")}` });
-      return;
-    };
+    // Crear un objeto con las propiedades definidas en req.body
+    const updates: Partial<DriverData> = {};
+    if (name) updates.name = name;
+    if (nationality) updates.nationality = nationality;
+    if (team) updates.team = team;
+    if (number) updates.number = number;
 
-    // Validar si ya existe un piloto con el mismo número
-    const existingNumber = await DriverModel.getDriverByNumber(number);
-    if(existingNumber && existingNumber._id.toString() !== id) {
-      res.status(400).json({ status: 400, error: "A driver with this number already exists" });
-      return;
+    // Validar si ya existe un piloto con el mismo nombre (si se intenta actualizar)
+    if (name) {
+      const existingDriver = await DriverModel.getDriverByName(name);
+      if (existingDriver && existingDriver._id.toString() !== id) {
+        res.status(400).json({ status: 400, error: "A driver with this name already exists" });
+        return;
+      };
     };
-
+    
+    // Validar si el equipo es válido (si se intenta actualizar)
+    if (team) {
+      const validTeams = Object.values(F1Teams);
+      if (!validTeams.includes(team)) {
+        res.status(400).json({
+          status: 400,
+          error: `"${team}" is not a valid team. Allowed teams: ${validTeams.join(", ")}`,
+        });
+        return;
+      };
+    };
+    
+    // Validar si ya existe un piloto con el mismo número (si se intenta actualizar)
+    if (number) {
+      const existingNumber = await DriverModel.getDriverByNumber(number);
+      if (existingNumber && existingNumber._id.toString() !== id) {
+        res.status(400).json({
+          status: 400,
+          error: `Another driver is currently using number ${number}. Please try with another number.`,
+        });
+        return;
+      };
+    };
+    
     // Actualizar piloto
     const updatedDriver = await DriverModel.updateDriver(id, {name, nationality, team, number});
-    if (!updatedDriver) {
-      res.status(404).json({ status: 404, message: "Driver not found" });
-      return;
-    };
 
     res.status(200).json(updatedDriver);
 
@@ -114,8 +137,9 @@ const deleteDriver = async (req: Request, res: Response) => {
   try {
     const deletedDriver = await DriverModel.deleteDriver(id);
 
-    if (!deletedDriver) {
-      res.status(404).json({ status: 404, message: "Driver not found" });
+    // Validar si el ID tiene un formato válido
+    if (!mongoose.isValidObjectId(id)) {
+      res.status(400).json({ status: 400, error: "Invalid ID format" });
       return;
     };
 
